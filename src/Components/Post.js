@@ -15,8 +15,10 @@ export class Post extends Component {
   componentDidMount() {
     this.postRef.on("value", (snapshot) => {
       if (snapshot.exists()) {
-        this.titleRef.current.value = snapshot.val().title;
-        this.bodyRef.current.value = snapshot.val().body;
+        this.titleRef.current.value &&
+          (this.titleRef.current.value = snapshot.val().title);
+        this.bodyRef.current.value &&
+          (this.bodyRef.current.value = snapshot.val().body);
         this.setState({
           mdBdoy: snapshot.val().body,
         });
