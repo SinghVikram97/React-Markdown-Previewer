@@ -14,10 +14,10 @@ export class Post extends Component {
   }
   componentDidMount() {
     this.postRef.on("value", (snapshot) => {
-      if (snapshot.exists()) {
-        this.titleRef.current.value &&
+      if (snapshot.val()) {
+        this.titleRef.current &&
           (this.titleRef.current.value = snapshot.val().title);
-        this.bodyRef.current.value &&
+        this.bodyRef.current &&
           (this.bodyRef.current.value = snapshot.val().body);
         this.setState({
           mdBdoy: snapshot.val().body,
@@ -40,7 +40,7 @@ export class Post extends Component {
     return (
       <>
         <div className="row">
-          <div className="col col-sm-12 mt-5 mb-4">
+          <div className="col col-sm-12 mt-5 mb-2">
             <Link to="/">
               <h4>Home</h4>
             </Link>
@@ -63,11 +63,14 @@ export class Post extends Component {
               ref={this.bodyRef}
               type="text"
               onChange={this.onChange}
-              row={30}
+              rows={30}
             ></textarea>
           </div>
           <div className="col col-sm-6">
-            <ReactMarkdown source={this.state.mdBdoy} />
+            <ReactMarkdown
+              source={this.state.mdBdoy}
+              className="markdown-preview"
+            />
           </div>
         </div>
       </>

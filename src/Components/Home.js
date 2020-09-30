@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import db from "../firebase";
 import { Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import Post from "./Post";
 class Home extends Component {
   state = {
     posts: [],
@@ -39,7 +38,6 @@ class Home extends Component {
       });
   };
   render() {
-    console.log(this.state.posts);
     return (
       <div>
         <h1 className="mt-5 mb-4 text-center">Create or Edit a Post</h1>
@@ -64,7 +62,7 @@ class Home extends Component {
           {this.state.posts.map((post) => {
             return (
               <div className="mt-4 mb-4" key={post.id}>
-                <Link to={`/posts/${post.id}`}>
+                <Link to={`/posts/${post.id}`} className="post-link">
                   <h2>{post.title}</h2>
                   <hr />
                 </Link>
